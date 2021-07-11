@@ -1,9 +1,7 @@
 package io.javabrains.ipldashboard.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.List;
 
 @Entity
 public class Team {
@@ -14,6 +12,11 @@ public class Team {
     private String teamName;
     private long totalMatches;
     private long totalWins;
+
+    //@Transient -> we are telling JPA that dont bother about this field for populating the data
+    //I will take care of this field
+    @Transient
+    private List<Match> latestMatchesList;
 
     public Team() {
 
@@ -49,6 +52,14 @@ public class Team {
 
     public void setTotalWins(long totalWins) {
         this.totalWins = totalWins;
+    }
+
+    public List<Match> getLatestMatchesList() {
+        return latestMatchesList;
+    }
+
+    public void setLatestMatchesList(List<Match> latestMatchesList) {
+        this.latestMatchesList = latestMatchesList;
     }
 
     public Team(String teamName, long totalMatches) {
